@@ -10,16 +10,15 @@ Route::get('/', function () {
 Route::get('/prueba', function(){
 
     $data = [
-        'body' => 'Prueba de tarea',
-        'user_id' => 1
+        'body' => 'Prueba de tarea 2',
+        'user_id' => 1,
     ];
-
 
     /* $task = new Task();
 
-    $task->body = 'Prueba de tarea';
-    $task->user_id = 1; 
-    $task->save();*/
+    $task->body = $data['body'];
+    $task->user_id = $data['user_id']; 
+    $task->save(); */
 
     $task = Task::create($data);
 
