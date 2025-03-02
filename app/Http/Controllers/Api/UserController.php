@@ -21,24 +21,24 @@ class UserController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show($user)
     {
         return response()->json([
-            'message' => 'Recuperar usuario con id ' . $id,
+            'message' => 'Recuperar usuario con id ' . $user,
         ]);
     }
 
-    public function update($id)
+    public function update($user)
     {
         return response()->json([
-            'message' => 'Actualizar usuario con id ' . $id,
+            'message' => 'Actualizar usuario con id ' . $user,
         ]);
     }
 
-    public function destroy($id)
+    public function destroy($user)
     {
         return response()->json([
-            'message' => 'Eliminar usuario con id ' . $id,
+            'message' => 'Eliminar usuario con id ' . $user,
         ]);
     }
 }
