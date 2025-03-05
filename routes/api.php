@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,7 @@ Route::get('users/cursos', function () {
 });
 
 Route::apiResource('users', UserController::class);
+Route::apiResource('taks', TaskController::class);
 
 /* Route::get('users', [UserController::class, 'index']);
 Route::post('users', [UserController::class, 'store']);
