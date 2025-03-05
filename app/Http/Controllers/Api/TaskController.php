@@ -29,18 +29,18 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($task)
+    public function show(Task $task)
     {
-        $task = Task::find($task);
+        //$task = Task::find($task);
         return response()->json($task);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $task)
+    public function update(Request $request, Task $task)
     {
-        $task = Task::find($task);
+        //$task = Task::find($task);
         $task->update($request->all());
 
         return response()->json($task);
@@ -49,9 +49,9 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($task)
+    public function destroy(Task $task)
     {
-        $task = Task::find($task);
+        //$task = Task::find($task);
         $task->delete();
 
         return response()->json(null, 204);
