@@ -17,6 +17,23 @@ class TaskController extends Controller
     {
         $tasks = Task::query();
 
+        if (request('filters')) {
+            $filters = request('filters');
+            
+            foreach ($filters as $field => $conditions) {
+                foreach ($conditions as $operator => $value) {
+                    if (in_array($operator, ['=', '>', '<', '>=', '<=', '!='])) {
+                        $tasks->where($field, $operator, $value);
+                    } 
+
+                    if ($operator == 'like') {
+                        $tasks->where($field, 'like', "%$value%");
+                    }
+                }
+            }
+
+        }
+
         if (request()->has('perPage')) {
             $tasks = $tasks->paginate(request()->query('perPage'));
         }else{
