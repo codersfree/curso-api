@@ -15,14 +15,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::query();
-
-        //Paginacion
-        if (request()->has('perPage')) {
-            $tasks = $tasks->paginate(request()->query('perPage'));
-        }else{
-            $tasks = $tasks->get();
-        }
+        $tasks = Task::getOrPaginate();
 
         return response()->json($tasks);
     }

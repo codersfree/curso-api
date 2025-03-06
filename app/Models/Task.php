@@ -28,4 +28,20 @@ class Task extends Model
     protected $guarded = [
         'paid'
     ];
+
+    public function scopeGetOrPaginate($query)
+    {
+        if (request()->has('perPage')) {
+            return $query->paginate(request()->query('perPage'));
+        }
+
+        return $query->get();
+        
+    }
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
