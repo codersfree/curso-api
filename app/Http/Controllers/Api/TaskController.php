@@ -17,55 +17,6 @@ class TaskController extends Controller
     {
         $tasks = Task::query();
 
-        //Aplicar filtros
-        if (request('filters')) {
-            $filters = request('filters');
-            
-            foreach ($filters as $field => $conditions) {
-                foreach ($conditions as $operator => $value) {
-                    if (in_array($operator, ['=', '>', '<', '>=', '<=', '!='])) {
-                        $tasks->where($field, $operator, $value);
-                    } 
-
-                    if ($operator == 'like') {
-                        $tasks->where($field, 'like', "%$value%");
-                    }
-                }
-            }
-
-        }
-
-        //Aplicar selects
-        if (request('select')) {
-            $select = request('select');
-            $selectArray = explode(',', $select);
-            $tasks->select($selectArray);
-        }
-
-        //Aplicar Orden
-        if (request('sort')) {
-
-            $sortFields = explode(',', request('sort'));
-
-            foreach ($sortFields as $sortField) {
-                
-                $direction = 'asc';
-
-                if (substr($sortField, 0, 1) == '-') {
-                    $direction = 'desc';
-                    $sortField = substr($sortField, 1);
-                }
-
-                $tasks->orderBy($sortField, $direction);
-            }
-        }
-
-        //Incluir relaciones
-        if (request('include')) {
-            $include = explode(',', request('include'));
-            $tasks->with($include);
-        }
-
         //Paginacion
         if (request()->has('perPage')) {
             $tasks = $tasks->paginate(request()->query('perPage'));
