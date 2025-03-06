@@ -17,6 +17,7 @@ class TaskController extends Controller
     {
         $tasks = Task::query();
 
+        //Aplicar filtros
         if (request('filters')) {
             $filters = request('filters');
             
@@ -32,6 +33,13 @@ class TaskController extends Controller
                 }
             }
 
+        }
+
+        //Aplicar selects
+        if (request('select')) {
+            $select = request('select');
+            $selectArray = explode(',', $select);
+            $tasks->select($selectArray);
         }
 
         if (request()->has('perPage')) {
