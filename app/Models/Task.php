@@ -10,14 +10,7 @@ use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-#[ScopedBy([
-    FilterScope::class,
-    SelectScope::class,
-    SortScope::class,
-    IncludeScope::class
-])]
-class Task extends Model
+class Task extends Api
 {
     use HasFactory;
 
@@ -28,17 +21,6 @@ class Task extends Model
     protected $guarded = [
         'paid'
     ];
-
-    public function scopeGetOrPaginate($query)
-    {
-        if (request()->has('perPage')) {
-            return $query->paginate(request()->query('perPage'));
-        }
-
-        return $query->get();
-        
-    }
-
 
     public function user()
     {
