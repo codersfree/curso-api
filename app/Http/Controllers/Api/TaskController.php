@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,8 @@ class TaskController extends Controller implements HasMiddleware
     {
         $tasks = Task::getOrPaginate();
 
-        return response()->json($tasks);
+        /* return response()->json($tasks); */
+        return TaskResource::collection($tasks);
     }
 
     /**
@@ -45,7 +47,9 @@ class TaskController extends Controller implements HasMiddleware
         $data['user_id'] = auth('api')->id();
 
         $task = Task::create($data);
-        return response()->json($task, 201);
+        //return response()->json($task, 201);
+
+        return TaskResource::make($task);
     }
 
     /**
@@ -54,7 +58,9 @@ class TaskController extends Controller implements HasMiddleware
     public function show(Task $task)
     {
         //$task = Task::find($task);
-        return response()->json($task);
+        //return response()->json($task);
+
+        return TaskResource::make($task);
     }
 
     /**
@@ -70,7 +76,9 @@ class TaskController extends Controller implements HasMiddleware
         //$task = Task::find($task);
         $task->update($request->all());
 
-        return response()->json($task);
+        //return response()->json($task);
+
+        return TaskResource::make($task);
     }
 
     /**
