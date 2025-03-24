@@ -8,8 +8,18 @@ use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
-class TaskController extends Controller
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+
+class TaskController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('auth:api', except: ['index', 'show']),
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -31,7 +41,10 @@ class TaskController extends Controller
             'user_id' => ['required', 'exists:users,id'],
         ]); */
 
-        $task = Task::create($request->all());
+        $data = $request->all();
+        $data['user_id'] = auth('api')->id();
+
+        $task = Task::create($data);
         return response()->json($task, 201);
     }
 
