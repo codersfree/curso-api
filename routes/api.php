@@ -1,21 +1,15 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return response()->json([
-        'message' => 'Hola desde la API de Laravel',
-    ]);
-});
-
-Route::get('users/cursos', function () {
-    return response()->json([
-        'message' => 'Listado de cursos',
-    ]);
-});
+Route::post('auth/login', [AuthController::class, 'login']);
+Route::post('auth/logout', [AuthController::class, 'logout']);
+Route::post('auth/refresh', [AuthController::class, 'refresh']);
+Route::post('auth/me', [AuthController::class, 'me']);
 
 Route::apiResource('users', UserController::class);
 Route::apiResource('taks', TaskController::class);
