@@ -18,6 +18,9 @@ Route::apiResource('users', UserController::class);
 Route::apiResource('taks', TaskController::class);
 
 Route::apiResource('categories', CategoryController::class);
+
+
+Route::post('posts/{post}/tags', [PostController::class, 'tags']);
 Route::apiResource('posts', PostController::class);
 
 /* Route::get('users', [UserController::class, 'index']);
