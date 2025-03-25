@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ Route::apiResource('users', UserController::class);
 Route::apiResource('taks', TaskController::class);
 
 Route::apiResource('categories', CategoryController::class);
+Route::apiResource('posts', PostController::class);
 
 /* Route::get('users', [UserController::class, 'index']);
 Route::post('users', [UserController::class, 'store']);
